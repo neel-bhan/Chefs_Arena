@@ -7,18 +7,25 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Parent root = fxmlLoader.load();
+        HelloController controller = fxmlLoader.getController();
+        controller.initStage(stage); // Pass the stage to the controller
+
+        Scene scene = new Scene(root, 1280, 720);
         stage.setTitle("Hello!");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-        //trying some changes here
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

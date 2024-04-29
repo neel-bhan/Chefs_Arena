@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neel_krish_soham.chefs_arena.HelloController">
+   <children>
+      <VBox cacheShape="false" centerShape="false" prefHeight="200.0" prefWidth="100.0" scaleShape="false" />
+      <ImageView fitHeight="737.0" fitWidth="1323.0" layoutX="-4.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/kitchen.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
