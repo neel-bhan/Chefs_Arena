@@ -1,17 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neel_krish_soham.chefs_arena.HelloController">
    <children>
       <VBox cacheShape="false" centerShape="false" prefHeight="200.0" prefWidth="100.0" scaleShape="false" />
-      <ImageView fitHeight="737.0" fitWidth="1323.0" layoutX="-4.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="720.0" fitWidth="1280.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/kitchen.png" />
          </image>
       </ImageView>
+      <Button mnemonicParsing="false" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" />
+      <Button layoutY="240.0" mnemonicParsing="false" onAction="#grill" opacity="0.0" prefHeight="240.0" prefWidth="214.0" text="Grill" />
+      <Button layoutY="120.0" mnemonicParsing="false" onAction="#drinks" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Drinks" />
+      <Button layoutY="480.0" mnemonicParsing="false" onAction="#meat" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Meat" />
+      <Button layoutY="600.0" mnemonicParsing="false" onAction="#tofu" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Tofu" />
+      <Button layoutX="214.0" layoutY="600.0" mnemonicParsing="false" onAction="#ramen" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Noodles" />
+      <Button layoutX="428.0" layoutY="600.0" mnemonicParsing="false" onAction="#trash" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Trash" />
+      <Button layoutX="642.0" layoutY="600.0" mnemonicParsing="false" onAction="#tray1" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Holder" />
+      <Button layoutX="856.0" layoutY="600.0" mnemonicParsing="false" onAction="#tray2" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Holder" />
+      <Button layoutX="1070.0" layoutY="480.0" mnemonicParsing="false" onAction="#sushi1" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Sushi1" />
+      <Button layoutX="1070.0" layoutY="360.0" mnemonicParsing="false" onAction="#sushi2" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Sushi 2" />
+      <Button layoutX="1070.0" layoutY="240.0" mnemonicParsing="false" onAction="#sushiroller" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="sushi roller" />
+      <Button layoutX="1070.0" layoutY="120.0" mnemonicParsing="false" onAction="#icecream" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Ice Cream" />
+         <Circle fx:id="playerCircle" layoutX="333.0" layoutY="252.0" radius="45.0" stroke="BLACK" strokeType="INSIDE">
+            <fill>
+               <RadialGradient centerX="0.4861878453038674" centerY="0.471563981042654">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color red="0.9210526347160339" green="0.7069221138954163" blue="0.3624512553215027" />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color red="1.0" green="1.0" blue="1.0" />
+                        </color>
+                     </Stop>
+                  </stops>
+               </RadialGradient>
+            </fill>
+         </Circle>
    </children>
 </AnchorPane>

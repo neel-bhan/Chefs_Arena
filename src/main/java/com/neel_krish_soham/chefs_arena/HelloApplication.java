@@ -3,7 +3,12 @@ package com.neel_krish_soham.chefs_arena;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.*;
+import javafx.animation.*;
+
 
 import java.io.IOException;
 
@@ -17,6 +22,8 @@ public class HelloApplication extends Application {
         Parent root = fxmlLoader.load();
         HelloController controller = fxmlLoader.getController();
         controller.initStage(stage); // Pass the stage to the controller
+
+
 
         Scene scene = new Scene(root, 1280, 720);
         stage.setTitle("Hello!");
