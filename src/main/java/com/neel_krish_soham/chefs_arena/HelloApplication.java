@@ -3,11 +3,9 @@
     import javafx.application.Application;
     import javafx.fxml.FXMLLoader;
     import javafx.scene.Scene;
-    import javafx.scene.paint.Color;
-    import javafx.scene.shape.Circle;
+    import javafx.scene.control.Menu;
     import javafx.stage.Stage;
-    import javafx.util.*;
-    import javafx.animation.*;
+
 
 
     import java.io.IOException;
@@ -18,9 +16,12 @@
     public class HelloApplication extends Application {
         @Override
         public void start(Stage stage) throws IOException {
+            System.out.println("Loading hello-view.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
             Parent root = fxmlLoader.load();
-            HelloController controller = fxmlLoader.getController();
+            System.out.println("hello-view.fxml loaded");
+
+            MenuControl controller = fxmlLoader.getController();
             controller.initStage(stage); // Pass the stage to the controller
 
 
