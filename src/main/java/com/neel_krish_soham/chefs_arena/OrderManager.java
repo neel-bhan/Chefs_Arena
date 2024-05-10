@@ -194,15 +194,15 @@ public class OrderManager {
 
 
     private int calculateTime() {
-        int baseTimePerItem = 25;
-        int decrementPerTenOrders = 5; // Significantly increased reduction
+        int baseTimePerItem = 20;
+        int decrementPerTenOrders = 4; // Significantly increased reduction
         int timeReduction = totalOrdersCompleted / 3 * decrementPerTenOrders; // Reductions occur more frequently, every 3 orders
 
         int totalItems = orders.size();
         int baseTime = totalItems * baseTimePerItem;
         int finalTime = baseTime - timeReduction;
 
-        return Math.max(finalTime, 10);
+        return Math.max(finalTime, 8);
     }
 
 

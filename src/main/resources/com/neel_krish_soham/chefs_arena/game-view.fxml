@@ -23,18 +23,18 @@
          </image>
       </ImageView>
       <Button mnemonicParsing="false" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" />
-      <Button layoutY="240.0" mnemonicParsing="false" onAction="#grill1" prefHeight="120.0" prefWidth="214.0" text="Grill1" />
-      <Button layoutY="120.0" mnemonicParsing="false" onAction="#drinks" prefHeight="120.0" prefWidth="213.333333333" text="Drinks" />
-      <Button layoutY="480.0" mnemonicParsing="false" onAction="#meat" prefHeight="120.0" prefWidth="213.333333333" text="Meat" />
-      <Button layoutY="600.0" mnemonicParsing="false" onAction="#tofu" prefHeight="120.0" prefWidth="213.333333333" text="Tofu" />
-      <Button layoutX="214.0" layoutY="600.0" mnemonicParsing="false" onAction="#noodles" prefHeight="120.0" prefWidth="213.333333333" text="Noodles" />
-      <Button layoutX="428.0" layoutY="600.0" mnemonicParsing="false" onAction="#trash" prefHeight="120.0" prefWidth="213.333333333" text="Trash" />
-      <Button layoutX="642.0" layoutY="600.0" mnemonicParsing="false" onAction="#tray1" prefHeight="120.0" prefWidth="213.333333333" text="Holder" />
-      <Button layoutX="856.0" layoutY="600.0" mnemonicParsing="false" onAction="#tray2" prefHeight="120.0" prefWidth="213.333333333" text="Holder" />
-      <Button layoutX="1070.0" layoutY="480.0" mnemonicParsing="false" onAction="#sushi1" prefHeight="120.0" prefWidth="213.333333333" text="fish1" />
-      <Button layoutX="1070.0" layoutY="360.0" mnemonicParsing="false" onAction="#sushi2" prefHeight="120.0" prefWidth="213.333333333" text="fish2" />
-      <Button layoutX="1070.0" layoutY="240.0" mnemonicParsing="false" onAction="#rice" prefHeight="120.0" prefWidth="213.333333333" text="ricecooker" />
-      <Button layoutX="1070.0" layoutY="120.0" mnemonicParsing="false" onAction="#rice2" prefHeight="120.0" prefWidth="213.333333333" text="ricecooker2" />
+      <Button layoutY="240.0" mnemonicParsing="false" onAction="#grill1" opacity="0.0" prefHeight="120.0" prefWidth="214.0" text="Grill1" />
+      <Button layoutY="120.0" mnemonicParsing="false" onAction="#drinks" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Drinks" />
+      <Button layoutY="480.0" mnemonicParsing="false" onAction="#meat" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Meat" />
+      <Button layoutY="600.0" mnemonicParsing="false" onAction="#tofu" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Tofu" />
+      <Button layoutX="214.0" layoutY="600.0" mnemonicParsing="false" onAction="#noodles" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Noodles" />
+      <Button layoutX="428.0" layoutY="600.0" mnemonicParsing="false" onAction="#trash" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Trash" />
+      <Button layoutX="642.0" layoutY="600.0" mnemonicParsing="false" onAction="#tray1" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Holder" />
+      <Button layoutX="856.0" layoutY="600.0" mnemonicParsing="false" onAction="#tray2" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="Holder" />
+      <Button layoutX="1070.0" layoutY="480.0" mnemonicParsing="false" onAction="#sushi1" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="fish1" />
+      <Button layoutX="1070.0" layoutY="360.0" mnemonicParsing="false" onAction="#sushi2" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="fish2" />
+      <Button layoutX="1070.0" layoutY="240.0" mnemonicParsing="false" onAction="#rice" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="ricecooker" />
+      <Button layoutX="1070.0" layoutY="120.0" mnemonicParsing="false" onAction="#rice2" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="ricecooker2" />
          <Circle fx:id="playerCircle" layoutX="333.0" layoutY="252.0" radius="45.0" stroke="BLACK" strokeType="INSIDE">
             <fill>
                <RadialGradient centerX="0.4861878453038674" centerY="0.471563981042654">
@@ -56,8 +56,8 @@
       <Button fx:id="customer1" layoutX="214.0" mnemonicParsing="false" onAction="#customer1" opacity="0.0" prefHeight="120.0" prefWidth="284.0" text="Customer1" />
       <Button layoutX="498.0" mnemonicParsing="false" onAction="#customer2" opacity="0.0" prefHeight="120.0" prefWidth="285.0" text="Customer2" />
       <Button layoutX="783.0" mnemonicParsing="false" onAction="#customer3" opacity="0.0" prefHeight="120.0" prefWidth="284.5" text="Customer3" />
-      <Button layoutY="360.0" mnemonicParsing="false" onAction="#grill2" prefHeight="120.0" prefWidth="214.0" text="Grill2" />
-      <Button layoutX="1070.0" layoutY="600.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="213.333333333" text="deleteme" />
+      <Button layoutY="360.0" mnemonicParsing="false" onAction="#grill2" opacity="0.0" prefHeight="120.0" prefWidth="214.0" text="Grill2" />
+      <Button layoutX="1070.0" layoutY="600.0" mnemonicParsing="false" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="deleteme" />
       <ProgressIndicator fx:id="pi1" layoutX="343.0" progress="0.0" />
       <ProgressIndicator fx:id="pi2" layoutX="629.0" progress="0.0" />
       <ProgressIndicator fx:id="pi3" layoutX="912.0" progress="0.0" />
