@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import javafx.scene.paint.ImagePattern;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -87,6 +88,10 @@ public class HelloController {
     public static OrderManager orderManager1;
     public static OrderManager orderManager2;
     public static OrderManager orderManager3;
+    @FXML
+    private ImageView trayview1;
+    @FXML
+    private ImageView trayview2;
 
     private boolean riceCookerInUse = false;
     private boolean riceCookerReady = false;
@@ -118,6 +123,9 @@ public class HelloController {
         orderManager3.image1.setOnMouseClicked(clicked -> customer3());
         orderManager3.image2.setOnMouseClicked(clicked -> customer3());
         orderManager3.image3.setOnMouseClicked(clicked -> customer3());
+
+        trayview1.setOnMouseClicked(clicked -> tray1());
+        trayview2.setOnMouseClicked(clicked -> tray2());
 
     }
     public void pickUpItem(String itemName) {
@@ -159,7 +167,7 @@ public class HelloController {
             player.grill1 = true;
             player.hand.remove(0);
             dropItem();
-        } else if (player.grill1 && player.grill1Ready && player.hand.get(0) == "noodles") {
+        } else if (player.grill1 && player.grill1Ready&& !player.hand.isEmpty() && player.hand.get(0) == "noodles") {
             pickUpMeatFromGrill1();
         } else {
             displayImageAtGridPosition("cross.png", 2, 0);
@@ -264,11 +272,45 @@ public class HelloController {
 
     public void tray1() {
         setPositionFromGrid(5, 3);
+
+        if(player.tray1 == null && !player.hand.isEmpty())
+        {
+            String imagePath = "images/" + player.hand.get(0) + ".png";
+            player.tray1 = player.hand.removeFirst();
+
+            InputStream stream = getClass().getResourceAsStream(imagePath);
+            Image image = new Image(stream);
+            trayview1.setImage(image);
+            dropItem();
+        } else if (player.tray1 != null && player.hand.isEmpty()) {
+            player.hand.add(player.tray1);
+            pickUpItem(player.tray1);
+            trayview1.setImage(null);
+            player.tray1 = null;
+
+        }
     }
 
     public void tray2() {
         setPositionFromGrid(5, 4);
 
+
+        if(player.tray2 == null && !player.hand.isEmpty())
+        {
+            String imagePath = "images/" + player.hand.get(0) + ".png";
+            player.tray2 = player.hand.removeFirst();
+
+            InputStream stream = getClass().getResourceAsStream(imagePath);
+            Image image = new Image(stream);
+            trayview2.setImage(image);
+            dropItem();
+        } else if (player.tray2 != null && player.hand.isEmpty()) {
+            player.hand.add(player.tray2);
+            pickUpItem(player.tray2);
+            trayview2.setImage(null);
+            player.tray2 = null;
+
+        }
     }
 
     public void sushi1() {
@@ -276,8 +318,8 @@ public class HelloController {
 
         if (!player.hand.isEmpty() && player.hand.get(0) == "rice") {
             player.hand.remove(0);
-            player.hand.add("sushi1");
-            pickUpItem("sushi1");
+            player.hand.add("sushi2");
+            pickUpItem("sushi2");
         } else {
             displayImageAtGridPosition("cross.png", 4, 5);
         }
@@ -288,8 +330,8 @@ public class HelloController {
 
         if (!player.hand.isEmpty() && player.hand.get(0) == "rice") {
             player.hand.remove(0);
-            player.hand.add("sushi2");
-            pickUpItem("sushi2");
+            player.hand.add("sushi1");
+            pickUpItem("sushi1");
         } else {
             displayImageAtGridPosition("cross.png", 3, 5);
         }
@@ -304,7 +346,7 @@ public class HelloController {
             // Start cooking rice
             ImageView rawRiceImageView2 = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/raw_rice.png")));
             rawRiceImageView2.setX(col * CELL_WIDTH+CELL_WIDTH/10 -9);
-            rawRiceImageView2.setY(row * CELL_HEIGHT+10);
+            rawRiceImageView2.setY(row * CELL_HEIGHT+9);
             rawRiceImageView2.setFitWidth(CELL_HEIGHT);
             rawRiceImageView2.setFitHeight(CELL_HEIGHT);
             rawRiceImageView2.setOnMouseClicked(event -> rice2());
@@ -321,7 +363,7 @@ public class HelloController {
                 cookedRiceImageView2  = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/cooked_rice.png")));
 
                 cookedRiceImageView2 .setX(col * CELL_WIDTH+CELL_WIDTH/10 -9);
-                cookedRiceImageView2 .setY(row * CELL_HEIGHT+10);
+                cookedRiceImageView2 .setY(row * CELL_HEIGHT+9);
                 cookedRiceImageView2 .setFitWidth(CELL_HEIGHT);
                 cookedRiceImageView2 .setFitHeight(CELL_HEIGHT);
                 cookedRiceImageView2 .setOnMouseClicked(clicked -> rice2());
@@ -355,7 +397,7 @@ public class HelloController {
             // Start cooking rice
             ImageView rawRiceImageView = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/raw_rice.png")));
             rawRiceImageView.setX(col * CELL_WIDTH+CELL_WIDTH/10 -9);
-            rawRiceImageView.setY(row * CELL_HEIGHT-10);
+            rawRiceImageView.setY(row * CELL_HEIGHT-9);
             rawRiceImageView.setFitWidth(CELL_HEIGHT);
             rawRiceImageView.setFitHeight(CELL_HEIGHT);
             rawRiceImageView.setOnMouseClicked(event -> rice());
@@ -372,7 +414,7 @@ public class HelloController {
                 cookedRiceImageView = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/cooked_rice.png")));
 
                 cookedRiceImageView.setX(col * CELL_WIDTH + CELL_WIDTH/10 -9);
-                cookedRiceImageView.setY(row * CELL_HEIGHT-10);
+                cookedRiceImageView.setY(row * CELL_HEIGHT-9);
                 cookedRiceImageView.setFitWidth(CELL_HEIGHT);
                 cookedRiceImageView.setFitHeight(CELL_HEIGHT);
                 cookedRiceImageView.setOnMouseClicked(clicked -> rice());

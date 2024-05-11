@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neel_krish_soham.chefs_arena.HelloController">
+<AnchorPane fx:id="mainPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neel_krish_soham.chefs_arena.HelloController">
    <children>
       <VBox cacheShape="false" centerShape="false" prefHeight="200.0" prefWidth="100.0" scaleShape="false" />
       <ImageView fitHeight="720.0" fitWidth="1280.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
@@ -58,9 +58,10 @@
       <Button layoutX="783.0" mnemonicParsing="false" onAction="#customer3" opacity="0.0" prefHeight="120.0" prefWidth="284.5" text="Customer3" />
       <Button layoutY="360.0" mnemonicParsing="false" onAction="#grill2" opacity="0.0" prefHeight="120.0" prefWidth="214.0" text="Grill2" />
       <Button layoutX="1070.0" layoutY="600.0" mnemonicParsing="false" opacity="0.0" prefHeight="120.0" prefWidth="213.333333333" text="deleteme" />
-      <ProgressIndicator fx:id="pi1" layoutX="343.0" progress="0.0" />
-      <ProgressIndicator fx:id="pi2" layoutX="629.0" progress="0.0" />
-      <ProgressIndicator fx:id="pi3" layoutX="912.0" progress="0.0" />
+      <ProgressIndicator fx:id="pi1" layoutX="343.0" progress="0.0" styleClass="fancy-progress, yellow" />
+      <ProgressIndicator fx:id="pi2" layoutX="629.0" progress="0.0" styleClass="fancy-progress, yellow" />
+      <ProgressIndicator fx:id="pi3" layoutX="912.0" progress="0.0" styleClass="fancy-progress, yellow" />
+
       <ImageView fx:id="image1" fitHeight="81.0" fitWidth="81.0" layoutX="224.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="image2" fitHeight="81.0" fitWidth="81.0" layoutX="316.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="image3" fitHeight="81.0" fitWidth="81.0" layoutX="407.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
@@ -91,5 +92,7 @@
             </LinearGradient>
          </stroke>
       </Text>
+      <ImageView fx:id="trayview1" fitHeight="81.0" fitWidth="81.0" layoutX="712.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="trayview2" fitHeight="81.0" fitWidth="81.0" layoutX="923.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

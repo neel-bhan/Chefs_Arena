@@ -19,6 +19,8 @@
             </ImageView>
              <Button layoutX="315.0" layoutY="520.0" onAction="#playgame" prefHeight="45.0" prefWidth="650.0" snapToPixel="false" style="-fx-background-color: black; -fx-background-radius: 20;                -fx-border-color: yellow; -fx-border-width: 2;                -fx-text-fill: yellow; -fx-font-family: 'Press Start 2P'; -fx-font-size: 24px; -fx-effect: dropshadow(gaussian, yellow, 5, 0.5, 0, 0);" text="Start">
              </Button>
+             <Button layoutX="365.0" layoutY="583.0" onAction="#openTutorial" prefHeight="45.0" prefWidth="550.0" snapToPixel="false" style="-fx-background-color: black; -fx-background-radius: 20;                -fx-border-color: yellow; -fx-border-width: 2;                -fx-text-fill: yellow; -fx-font-family: 'Press Start 2P'; -fx-font-size: 24px; -fx-effect: dropshadow(gaussian, yellow, 5, 0.5, 0, 0);" text="Tutorial">
+             </Button>
 
 
 

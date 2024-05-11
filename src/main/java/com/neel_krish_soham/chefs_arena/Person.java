@@ -9,5 +9,7 @@ public class Person {
     public boolean grill2 = false;
     public boolean grill2Ready = false;
     public boolean grill1Ready = false;
+    public String tray1 = null;
+    public String tray2 = null;
 
 }

@@ -207,19 +207,21 @@ public class OrderManager {
 
 
     public void generateOrder() {
-        HashMap<String, Boolean> newOrder = new HashMap<>();
-        HashMap<String, Integer> newOrderList = new HashMap<>();
-        int itemsCount = rand.nextInt(3) + 1; // Generates between 1 and 3 items per order.
+        if(lives >= 0) {
+            HashMap<String, Boolean> newOrder = new HashMap<>();
+            HashMap<String, Integer> newOrderList = new HashMap<>();
+            int itemsCount = rand.nextInt(3) + 1; // Generates between 1 and 3 items per order.
 
-        for (int i = 0; i < itemsCount; i++) {
-            String item = possibleItems[rand.nextInt(possibleItems.length)];
+            for (int i = 0; i < itemsCount; i++) {
+                String item = possibleItems[rand.nextInt(possibleItems.length)];
 
-            newOrder.put(item, false); // All items start as not completed.
+                newOrder.put(item, false); // All items start as not completed.
+            }
+
+            this.orders = newOrder;
+
+            updateImageViews();
         }
-
-        this.orders = newOrder;
-
-        updateImageViews();
     }
 
 
