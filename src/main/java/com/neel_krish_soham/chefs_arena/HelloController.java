@@ -2,8 +2,6 @@ package com.neel_krish_soham.chefs_arena;
 
 import javafx.animation.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,14 +9,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.paint.ImagePattern;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class HelloController {
@@ -33,9 +31,7 @@ public class HelloController {
     @FXML
     private Pane mainPane;
 
-    private static Stage stage;
-
-    private Person player = new Person();
+    private final Person player = new Person();
 
     public static int money_counter =0;
 
@@ -112,26 +108,25 @@ public class HelloController {
         orderManager2.setImageViews(image4, image5, image6);
         orderManager3.setImageViews(image7, image8, image9);
 
-        orderManager1.image1.setOnMouseClicked(clicked -> customer1());
-        orderManager1.image2.setOnMouseClicked(clicked -> customer1());
-        orderManager1.image3.setOnMouseClicked(clicked -> customer1());
+        orderManager1.image1.setOnMouseClicked(_ -> customer1());
+        orderManager1.image2.setOnMouseClicked(_ -> customer1());
+        orderManager1.image3.setOnMouseClicked(_ -> customer1());
 
-        orderManager2.image1.setOnMouseClicked(clicked -> customer2());
-        orderManager2.image2.setOnMouseClicked(clicked -> customer2());
-        orderManager2.image3.setOnMouseClicked(clicked -> customer2());
+        orderManager2.image1.setOnMouseClicked(_ -> customer2());
+        orderManager2.image2.setOnMouseClicked(_ -> customer2());
+        orderManager2.image3.setOnMouseClicked(_ -> customer2());
 
-        orderManager3.image1.setOnMouseClicked(clicked -> customer3());
-        orderManager3.image2.setOnMouseClicked(clicked -> customer3());
-        orderManager3.image3.setOnMouseClicked(clicked -> customer3());
+        orderManager3.image1.setOnMouseClicked(_ -> customer3());
+        orderManager3.image2.setOnMouseClicked(_ -> customer3());
+        orderManager3.image3.setOnMouseClicked(_ -> customer3());
 
-        trayview1.setOnMouseClicked(clicked -> tray1());
-        trayview2.setOnMouseClicked(clicked -> tray2());
+        trayview1.setOnMouseClicked(_ -> tray1());
+        trayview2.setOnMouseClicked(_ -> tray2());
 
     }
     public void pickUpItem(String itemName) {
         setPlayerImage(itemName + ".png");  // Update the circle's image
-        // Or update the ImageView's image
-        Image image = new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/" + itemName + ".png"));
+
 
     }
 
@@ -142,7 +137,7 @@ public class HelloController {
 
 
     public void setPlayerImage(String imageName) {
-        Image image = new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/" + imageName));
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/" + imageName)));
         playerCircle.setFill(new ImagePattern(image));
     }
 
@@ -156,35 +151,35 @@ public class HelloController {
             player.hand.add("drinks");
             pickUpItem("drinks");
         } else {
-            displayImageAtGridPosition("cross.png", 1, 0);
+            displayImageAtGridPosition(1, 0);
         }
     }
 
     public void grill1() {
         setPositionFromGrid(2, 0);
-        if (!player.grill1 && !player.hand.isEmpty() && player.hand.get(0).equals("meat")) {
-            displayImageAtGrill(1, "meat.png", "cooked_meat.png", 2, 0);
+        if (!player.grill1 && !player.hand.isEmpty() && player.hand.getFirst().equals("meat")) {
+            displayImageAtGrill(1, 2);
             player.grill1 = true;
-            player.hand.remove(0);
+            player.hand.removeFirst();
             dropItem();
-        } else if (player.grill1 && player.grill1Ready&& !player.hand.isEmpty() && player.hand.get(0) == "noodles") {
+        } else if (player.grill1 && player.grill1Ready&& !player.hand.isEmpty() && Objects.equals(player.hand.getFirst(), "noodles")) {
             pickUpMeatFromGrill1();
         } else {
-            displayImageAtGridPosition("cross.png", 2, 0);
+            displayImageAtGridPosition(2, 0);
         }
     }
 
     public void grill2() {
         setPositionFromGrid(3, 0);
-        if (!player.grill2 && !player.hand.isEmpty() && player.hand.get(0).equals("meat")) {
-            displayImageAtGrill(2, "meat.png", "cooked_meat.png", 3, 0);
+        if (!player.grill2 && !player.hand.isEmpty() && player.hand.getFirst().equals("meat")) {
+            displayImageAtGrill(2, 3);
             player.grill2 = true;
-            player.hand.remove(0);
+            player.hand.removeFirst();
             dropItem();
-        } else if (player.grill2 && player.grill2Ready && !player.hand.isEmpty() && player.hand.get(0) == "noodles") {
+        } else if (player.grill2 && player.grill2Ready && !player.hand.isEmpty() && Objects.equals(player.hand.getFirst(), "noodles")) {
             pickUpMeatFromGrill2();
         } else {
-            displayImageAtGridPosition("cross.png", 3, 0);
+            displayImageAtGridPosition(3, 0);
         }
     }
 
@@ -204,7 +199,7 @@ public class HelloController {
             player.grill1Ready = false;
             player.grill1 = false;
         } else {
-            displayImageAtGridPosition("cross.png", 2, 0);  // Show error or feedback
+            displayImageAtGridPosition(2, 0);  // Show error or feedback
         }
     }
 
@@ -215,7 +210,7 @@ public class HelloController {
         if (player.grill2Ready) {
             mainPane.getChildren().remove(cookedMeatImageView2);
             cookedMeatImageView2 = null;
-            if(!player.hand.isEmpty() && player.hand.get(0).equals("noodles")) {
+            if(!player.hand.isEmpty() && player.hand.getFirst().equals("noodles")) {
                 player.hand.removeFirst();
                 player.hand.add("ramen");
                 pickUpItem("ramen");
@@ -224,7 +219,7 @@ public class HelloController {
             player.grill2Ready = false;
             player.grill2 = false;
         } else {
-            displayImageAtGridPosition("cross.png", 3, 0);  // Show error or feedback
+            displayImageAtGridPosition(3, 0);  // Show error or feedback
         }
     }
 
@@ -234,7 +229,7 @@ public class HelloController {
             player.hand.add("meat");
             pickUpItem("meat");
         } else {
-            displayImageAtGridPosition("cross.png", 4, 0);
+            displayImageAtGridPosition(4, 0);
         }
     }
 
@@ -245,7 +240,7 @@ public class HelloController {
             player.hand.add("tofu");
             pickUpItem("tofu");
         } else {
-            displayImageAtGridPosition("cross.png", 5, 0);
+            displayImageAtGridPosition(5, 0);
         }
     }
 
@@ -256,7 +251,7 @@ public class HelloController {
             player.hand.add("noodles");
             pickUpItem("noodles");
         } else {
-            displayImageAtGridPosition("cross.png", 5, 1);
+            displayImageAtGridPosition(5, 1);
         }
     }
 
@@ -275,11 +270,14 @@ public class HelloController {
 
         if(player.tray1 == null && !player.hand.isEmpty())
         {
-            String imagePath = "images/" + player.hand.get(0) + ".png";
+            String imagePath = "images/" + player.hand.getFirst() + ".png";
             player.tray1 = player.hand.removeFirst();
 
             InputStream stream = getClass().getResourceAsStream(imagePath);
-            Image image = new Image(stream);
+            Image image = null;
+            if (stream != null) {
+                image = new Image(stream);
+            }
             trayview1.setImage(image);
             dropItem();
         } else if (player.tray1 != null && player.hand.isEmpty()) {
@@ -297,11 +295,14 @@ public class HelloController {
 
         if(player.tray2 == null && !player.hand.isEmpty())
         {
-            String imagePath = "images/" + player.hand.get(0) + ".png";
+            String imagePath = "images/" + player.hand.getFirst() + ".png";
             player.tray2 = player.hand.removeFirst();
 
             InputStream stream = getClass().getResourceAsStream(imagePath);
-            Image image = new Image(stream);
+            Image image = null;
+            if (stream != null) {
+                image = new Image(stream);
+            }
             trayview2.setImage(image);
             dropItem();
         } else if (player.tray2 != null && player.hand.isEmpty()) {
@@ -316,24 +317,24 @@ public class HelloController {
     public void sushi1() {
         setPositionFromGrid(4, 5);
 
-        if (!player.hand.isEmpty() && player.hand.get(0) == "rice") {
-            player.hand.remove(0);
+        if (!player.hand.isEmpty() && Objects.equals(player.hand.getFirst(), "rice")) {
+            player.hand.removeFirst();
             player.hand.add("sushi2");
             pickUpItem("sushi2");
         } else {
-            displayImageAtGridPosition("cross.png", 4, 5);
+            displayImageAtGridPosition(4, 5);
         }
     }
 
     public void sushi2() {
         setPositionFromGrid(3, 5);
 
-        if (!player.hand.isEmpty() && player.hand.get(0) == "rice") {
-            player.hand.remove(0);
+        if (!player.hand.isEmpty() && Objects.equals(player.hand.getFirst(), "rice")) {
+            player.hand.removeFirst();
             player.hand.add("sushi1");
             pickUpItem("sushi1");
         } else {
-            displayImageAtGridPosition("cross.png", 3, 5);
+            displayImageAtGridPosition(3, 5);
         }
     }
     @FXML
@@ -344,49 +345,55 @@ public class HelloController {
         setPositionFromGrid(row, col);
         if (!riceCookerInUse2 && !riceCookerReady2) {
             // Start cooking rice
-            ImageView rawRiceImageView2 = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/raw_rice.png")));
+            ImageView rawRiceImageView2 = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/raw_rice.png"))));
             rawRiceImageView2.setX(col * CELL_WIDTH+CELL_WIDTH/10 -9);
             rawRiceImageView2.setY(row * CELL_HEIGHT+9);
             rawRiceImageView2.setFitWidth(CELL_HEIGHT);
             rawRiceImageView2.setFitHeight(CELL_HEIGHT);
-            rawRiceImageView2.setOnMouseClicked(event -> rice2());
+            rawRiceImageView2.setOnMouseClicked(_ -> rice2());
 
 
             mainPane.getChildren().add(rawRiceImageView2);
 
             riceCookerInUse2 = true;
 
-            PauseTransition riceCookingPause = new PauseTransition(Duration.seconds(5));
-            riceCookingPause.setOnFinished(event -> {
-                mainPane.getChildren().remove(rawRiceImageView2);
-
-                cookedRiceImageView2  = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/cooked_rice.png")));
-
-                cookedRiceImageView2 .setX(col * CELL_WIDTH+CELL_WIDTH/10 -9);
-                cookedRiceImageView2 .setY(row * CELL_HEIGHT+9);
-                cookedRiceImageView2 .setFitWidth(CELL_HEIGHT);
-                cookedRiceImageView2 .setFitHeight(CELL_HEIGHT);
-                cookedRiceImageView2 .setOnMouseClicked(clicked -> rice2());
-                mainPane.getChildren().add(cookedRiceImageView2 );
-
-                riceCookerReady2 = true;
-            });
+            PauseTransition riceCookingPause = getPauseTransition(rawRiceImageView2, col, row);
             riceCookingPause.play();
         } else if (riceCookerReady2 && player.hand.isEmpty()) {
             // Pick up cooked rice
             mainPane.getChildren().remove(cookedRiceImageView2 );
             cookedRiceImageView2  = null;
-            player.hand.add(0, "rice");
+            player.hand.addFirst("rice");
             pickUpItem("cooked_rice");
 
             riceCookerReady2 = false;
             riceCookerInUse2 = false;
         } else {
             // Display an error if rice is still cooking and not ready to pick up
-            displayImageAtGridPosition("cross.png", row, col);
+            displayImageAtGridPosition(row, col);
         }
-        if(!player.hand.isEmpty()) System.out.println(player.hand.get(0));
+        if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());
     }
+
+    private @NotNull PauseTransition getPauseTransition(ImageView rawRiceImageView2, int col, int row) {
+        PauseTransition riceCookingPause = new PauseTransition(Duration.seconds(5));
+        riceCookingPause.setOnFinished(_ -> {
+            mainPane.getChildren().remove(rawRiceImageView2);
+
+            cookedRiceImageView2  = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/cooked_rice.png"))));
+
+            cookedRiceImageView2 .setX(col * CELL_WIDTH+CELL_WIDTH/10 -9);
+            cookedRiceImageView2 .setY(row * CELL_HEIGHT+9);
+            cookedRiceImageView2 .setFitWidth(CELL_HEIGHT);
+            cookedRiceImageView2 .setFitHeight(CELL_HEIGHT);
+            cookedRiceImageView2 .setOnMouseClicked(_ -> rice2());
+            mainPane.getChildren().add(cookedRiceImageView2 );
+
+            riceCookerReady2 = true;
+        });
+        return riceCookingPause;
+    }
+
     @FXML
     public void rice() {
         System.out.print("rice");
@@ -395,64 +402,59 @@ public class HelloController {
         setPositionFromGrid(row, col);
         if (!riceCookerInUse && !riceCookerReady) {
             // Start cooking rice
-            ImageView rawRiceImageView = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/raw_rice.png")));
+            ImageView rawRiceImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/raw_rice.png"))));
             rawRiceImageView.setX(col * CELL_WIDTH+CELL_WIDTH/10 -9);
             rawRiceImageView.setY(row * CELL_HEIGHT-9);
             rawRiceImageView.setFitWidth(CELL_HEIGHT);
             rawRiceImageView.setFitHeight(CELL_HEIGHT);
-            rawRiceImageView.setOnMouseClicked(event -> rice());
+            rawRiceImageView.setOnMouseClicked(_ -> rice());
 
 
             mainPane.getChildren().add(rawRiceImageView);
 
             riceCookerInUse = true;
 
-            PauseTransition riceCookingPause = new PauseTransition(Duration.seconds(5));
-            riceCookingPause.setOnFinished(event -> {
-                mainPane.getChildren().remove(rawRiceImageView);
-
-                cookedRiceImageView = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/cooked_rice.png")));
-
-                cookedRiceImageView.setX(col * CELL_WIDTH + CELL_WIDTH/10 -9);
-                cookedRiceImageView.setY(row * CELL_HEIGHT-9);
-                cookedRiceImageView.setFitWidth(CELL_HEIGHT);
-                cookedRiceImageView.setFitHeight(CELL_HEIGHT);
-                cookedRiceImageView.setOnMouseClicked(clicked -> rice());
-                mainPane.getChildren().add(cookedRiceImageView);
-
-                riceCookerReady = true;
-            });
+            PauseTransition riceCookingPause = getTransition(rawRiceImageView, col, row);
             riceCookingPause.play();
         } else if (riceCookerReady && player.hand.isEmpty()) {
             // Pick up cooked rice
             mainPane.getChildren().remove(cookedRiceImageView);
             cookedRiceImageView = null;
-            player.hand.add(0, "rice");
+            player.hand.addFirst("rice");
             pickUpItem("cooked_rice");
 
             riceCookerReady = false;
             riceCookerInUse = false;
         } else {
             // Display an error if rice is still cooking and not ready to pick up
-            displayImageAtGridPosition("cross.png", row, col);
+            displayImageAtGridPosition(row, col);
         }
-        if(!player.hand.isEmpty()) System.out.println(player.hand.get(0));
+        if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());
     }
 
-    public void icecream() {
-        setPositionFromGrid(1, 5);
+    private @NotNull PauseTransition getTransition(ImageView rawRiceImageView, int col, int row) {
+        PauseTransition riceCookingPause = new PauseTransition(Duration.seconds(5));
+        riceCookingPause.setOnFinished(_ -> {
+            mainPane.getChildren().remove(rawRiceImageView);
 
-        if (player.hand.isEmpty()) {
-            player.hand.add("icecream");
-            pickUpItem("icecream");
-        } else {
-            displayImageAtGridPosition("cross.png", 1, 5);
-        }
+            cookedRiceImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/cooked_rice.png"))));
+
+            cookedRiceImageView.setX(col * CELL_WIDTH + CELL_WIDTH/10 -9);
+            cookedRiceImageView.setY(row * CELL_HEIGHT-9);
+            cookedRiceImageView.setFitWidth(CELL_HEIGHT);
+            cookedRiceImageView.setFitHeight(CELL_HEIGHT);
+            cookedRiceImageView.setOnMouseClicked(_ -> rice());
+            mainPane.getChildren().add(cookedRiceImageView);
+
+            riceCookerReady = true;
+        });
+        return riceCookingPause;
     }
+
 
     public void customer1() {
         if (!player.hand.isEmpty()) {
-            String firstItemInHand = player.hand.get(0);
+            String firstItemInHand = player.hand.getFirst();
 
             // Check and complete the item in the order.
             if (orderManager1.getOrders().containsKey(firstItemInHand) && !orderManager1.getOrders().get(firstItemInHand)) {
@@ -460,22 +462,9 @@ public class HelloController {
                 money_counter += priceMap.get(firstItemInHand);
                 money.setText("$" + money_counter);
                 int index = orderManager1.orders_list.get(firstItemInHand);
-                if(index == 0)
-                {
-                    image1.setImage(null);
-                }
-                if(index == 1)
-                {
-                    image2.setImage(null);
-                }
-                if(index == 2)
-                {
-                    image3.setImage(null);
-                }
-                player.hand.remove(0);
-                dropItem();
+                setimages(image1, image2, image3, index);
             } else {
-                displayImageAtGridPosition("cross.png", 0, 1);
+                displayImageAtGridPosition(0, 1);
             }
 
             if (orderManager1.isOrderComplete()) {
@@ -483,39 +472,22 @@ public class HelloController {
                 orderManager1.onOrderExpired();
             }
         } else {
-            displayImageAtGridPosition("cross.png", 0, 1);
-            if(!player.hand.isEmpty()) System.out.println(player.hand.get(0));
+            displayImageAtGridPosition(0, 1);
+            if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());
         }
     }
 
 
     public void customer2() {
         if (!player.hand.isEmpty()) {
-            String firstItemInHand = player.hand.get(0);
+            String firstItemInHand = player.hand.getFirst();
 
             // Check and complete the item in the order.
             if (orderManager2.getOrders().containsKey(firstItemInHand) && !orderManager2.getOrders().get(firstItemInHand)) {
-                orderManager2.getOrders().put(firstItemInHand, true);
-                int index = orderManager2.orders_list.get(firstItemInHand);
-                money_counter += priceMap.get(firstItemInHand);
-                money.setText("$" + money_counter);
-                if(index == 0)
-                {
-                    image4.setImage(null);
-                }
-                if(index == 1)
-                {
-                    image5.setImage(null);
-                }
-                if(index == 2)
-                {
-                    image6.setImage(null);
-                }
-                player.hand.remove(0);
-                dropItem();
+                set(firstItemInHand, orderManager2, image4, image5, image6);
             } else {
-                displayImageAtGridPosition("cross.png", 0, 2);
-                if(!player.hand.isEmpty()) System.out.println(player.hand.get(0));// Ensure the position reflects this customer's unique UI space.
+                displayImageAtGridPosition(0, 2);
+                if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());// Ensure the position reflects this customer's unique UI space.
             }
 
             if (orderManager2.isOrderComplete()) {
@@ -523,37 +495,20 @@ public class HelloController {
                 orderManager2.onOrderExpired();
             }
         } else {
-            displayImageAtGridPosition("cross.png", 0, 2);  // Handle cases where player's hand is empty.
+            displayImageAtGridPosition(0, 2);  // Handle cases where player's hand is empty.
         }
     }
 
     public void customer3() {
         if (!player.hand.isEmpty()) {
-            String firstItemInHand = player.hand.get(0);
+            String firstItemInHand = player.hand.getFirst();
 
             // Check and complete the item in the order.
             if (orderManager3.getOrders().containsKey(firstItemInHand) && !orderManager3.getOrders().get(firstItemInHand)) {
-                orderManager3.getOrders().put(firstItemInHand, true);
-                int index = orderManager3.orders_list.get(firstItemInHand);
-                money_counter += priceMap.get(firstItemInHand);
-                money.setText("$" + money_counter);
-                if(index == 0)
-                {
-                    image7.setImage(null);
-                }
-                if(index == 1)
-                {
-                    image8.setImage(null);
-                }
-                if(index == 2)
-                {
-                    image9.setImage(null);
-                }
-                player.hand.remove(0);
-                dropItem();
+                set(firstItemInHand, orderManager3, image7, image8, image9);
             } else {
-                displayImageAtGridPosition("cross.png", 0, 3);
-                if(!player.hand.isEmpty()) System.out.println(player.hand.get(0));// Ensure the position reflects this customer's unique UI space.
+                displayImageAtGridPosition(0, 3);
+                if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());// Ensure the position reflects this customer's unique UI space.
             }
 
             if (orderManager3.isOrderComplete()) {
@@ -561,8 +516,33 @@ public class HelloController {
                 orderManager3.onOrderExpired();
             }
         } else {
-            displayImageAtGridPosition("cross.png", 0, 3);  // Handle cases where player's hand is empty.
+            displayImageAtGridPosition(0, 3);  // Handle cases where player's hand is empty.
         }
+    }
+
+    private void set(String firstItemInHand, OrderManager orderManager3, ImageView image7, ImageView image8, ImageView image9) {
+        orderManager3.getOrders().put(firstItemInHand, true);
+        int index = orderManager3.orders_list.get(firstItemInHand);
+        money_counter += priceMap.get(firstItemInHand);
+        money.setText("$" + money_counter);
+        setimages(image7, image8, image9, index);
+    }
+
+    private void setimages(ImageView image7, ImageView image8, ImageView image9, int index) {
+        if(index == 0)
+        {
+            image7.setImage(null);
+        }
+        if(index == 1)
+        {
+            image8.setImage(null);
+        }
+        if(index == 2)
+        {
+            image9.setImage(null);
+        }
+        player.hand.removeFirst();
+        dropItem();
     }
 
     @FXML
@@ -619,8 +599,9 @@ public class HelloController {
         }
     }
 
-    private void displayImageAtGridPosition(String imageName, int row, int col) {
-        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/" + imageName)));
+    private void displayImageAtGridPosition(int row, int col) {
+        ImageView imageView;
+        imageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/" + "cross.png"))));
         imageView.setX(col * CELL_WIDTH);
         imageView.setY(row * CELL_HEIGHT);
         imageView.setFitWidth(CELL_WIDTH);
@@ -628,13 +609,13 @@ public class HelloController {
         mainPane.getChildren().add(imageView);
 
         PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
-        pause.setOnFinished(event -> mainPane.getChildren().remove(imageView));
+        pause.setOnFinished(_ -> mainPane.getChildren().remove(imageView));
         pause.play();
     }
 
-    private void displayImageAtGrill(int grillNumber, String initialImageName, String finalImageName, int row, int col) {
-        ImageView initialImageView = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/" + initialImageName)));
-        initialImageView.setX(col * CELL_WIDTH+30);
+    private void displayImageAtGrill(int grillNumber, int row) {
+        ImageView initialImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/" + "meat.png"))));
+        initialImageView.setX(0 * CELL_WIDTH+30);
         initialImageView.setY(row * CELL_HEIGHT);
         initialImageView.setFitWidth(CELL_WIDTH);
         initialImageView.setFitHeight(CELL_HEIGHT);
@@ -642,18 +623,18 @@ public class HelloController {
 
 
         PauseTransition initialPause = new PauseTransition(Duration.seconds(4));
-        initialPause.setOnFinished(event -> {
+        initialPause.setOnFinished(_ -> {
             mainPane.getChildren().remove(initialImageView);
 
-            ImageView cookedMeatImageView = new ImageView(new Image(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/" + finalImageName)));
-            cookedMeatImageView.setX(col * CELL_WIDTH);
+            ImageView cookedMeatImageView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/neel_krish_soham/chefs_arena/images/" + "cooked_meat.png"))));
+            cookedMeatImageView.setX(0 * CELL_WIDTH);
             cookedMeatImageView.setY(row * CELL_HEIGHT);
             cookedMeatImageView.setFitWidth(CELL_WIDTH);
             cookedMeatImageView.setFitHeight(CELL_HEIGHT);
             if(grillNumber == 1)
-                cookedMeatImageView.setOnMouseClicked(clicked -> grill1());
+                cookedMeatImageView.setOnMouseClicked(_ -> grill1());
             else
-                cookedMeatImageView.setOnMouseClicked(clicked -> grill2());
+                cookedMeatImageView.setOnMouseClicked(_ -> grill2());
             mainPane.getChildren().add(cookedMeatImageView);
 
             if (grillNumber == 1) {
