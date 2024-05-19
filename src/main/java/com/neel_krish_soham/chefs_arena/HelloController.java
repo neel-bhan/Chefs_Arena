@@ -48,8 +48,7 @@ public class HelloController {
         put("sushi2", 10);
         put("ramen",15);
         put("tofu", 4);
-        put("icecream", 3);
-    }};
+        put("icecream", 3);}};
 
     @FXML
     private ProgressIndicator pi1;
@@ -147,8 +146,8 @@ public class HelloController {
     public void drinks() {
         setPositionFromGrid(0, 1);
 
-        if (player.hand.isEmpty()) {
-            player.hand.add("drinks");
+        if (player.hand.equals("empty")) {
+            player.hand ="drinks";
             pickUpItem("drinks");
         } else {
             displayImageAtGridPosition(1, 0);
@@ -157,12 +156,12 @@ public class HelloController {
 
     public void grill1() {
         setPositionFromGrid(2, 0);
-        if (!player.grill1 && !player.hand.isEmpty() && player.hand.getFirst().equals("meat")) {
+        if (!player.grill1 && !player.hand.equals("empty") && player.hand.equals("meat")) {
             displayImageAtGrill(1, 2);
             player.grill1 = true;
-            player.hand.removeFirst();
+            player.hand = "empty";
             dropItem();
-        } else if (player.grill1 && player.grill1Ready&& !player.hand.isEmpty() && Objects.equals(player.hand.getFirst(), "noodles")) {
+        } else if (player.grill1 && player.grill1Ready&& !player.hand.equals("empty") && Objects.equals(player.hand, "noodles")) {
             pickUpMeatFromGrill1();
         } else {
             displayImageAtGridPosition(2, 0);
@@ -171,12 +170,12 @@ public class HelloController {
 
     public void grill2() {
         setPositionFromGrid(3, 0);
-        if (!player.grill2 && !player.hand.isEmpty() && player.hand.getFirst().equals("meat")) {
+        if (!player.grill2 && !player.hand.equals("empty") && player.hand.equals("meat")) {
             displayImageAtGrill(2, 3);
             player.grill2 = true;
-            player.hand.removeFirst();
+            player.hand = "empty";
             dropItem();
-        } else if (player.grill2 && player.grill2Ready && !player.hand.isEmpty() && Objects.equals(player.hand.getFirst(), "noodles")) {
+        } else if (player.grill2 && player.grill2Ready && !player.hand.equals("empty") && player.hand.equals("noodles")) {
             pickUpMeatFromGrill2();
         } else {
             displayImageAtGridPosition(3, 0);
@@ -186,15 +185,8 @@ public class HelloController {
     private void pickUpMeatFromGrill1() {
         if (player.grill1Ready) {
             mainPane.getChildren().remove(cookedMeatImageView1);
-            if(player.hand.isEmpty())
-                player.hand.add("ramen");
-            else
-                player.hand.set(0, "ramen");
-
-
+            player.hand = "ramen";
             pickUpItem("ramen");
-
-
             cookedMeatImageView1 = null;
             player.grill1Ready = false;
             player.grill1 = false;
@@ -210,12 +202,8 @@ public class HelloController {
         if (player.grill2Ready) {
             mainPane.getChildren().remove(cookedMeatImageView2);
             cookedMeatImageView2 = null;
-            if(!player.hand.isEmpty() && player.hand.getFirst().equals("noodles")) {
-                player.hand.removeFirst();
-                player.hand.add("ramen");
-                pickUpItem("ramen");
-            }
-
+            player.hand ="ramen";
+            pickUpItem("ramen");
             player.grill2Ready = false;
             player.grill2 = false;
         } else {
@@ -225,8 +213,8 @@ public class HelloController {
 
     public void meat() {
         setPositionFromGrid(4, 0);
-        if (player.hand.isEmpty()) {
-            player.hand.add("meat");
+        if (player.hand.equals("empty")) {
+            player.hand ="meat";
             pickUpItem("meat");
         } else {
             displayImageAtGridPosition(4, 0);
@@ -236,8 +224,8 @@ public class HelloController {
     public void tofu() {
         setPositionFromGrid(4, 0);
 
-        if (player.hand.isEmpty()) {
-            player.hand.add("tofu");
+        if (player.hand.equals("empty")) {
+            player.hand ="tofu";
             pickUpItem("tofu");
         } else {
             displayImageAtGridPosition(5, 0);
@@ -247,8 +235,8 @@ public class HelloController {
     public void noodles() {
         setPositionFromGrid(5, 1);
 
-        if (player.hand.isEmpty()) {
-            player.hand.add("noodles");
+        if (player.hand.equals("empty")) {
+            player.hand ="noodles";
             pickUpItem("noodles");
         } else {
             displayImageAtGridPosition(5, 1);
@@ -258,8 +246,8 @@ public class HelloController {
     public void trash() {
         setPositionFromGrid(5, 2);
 
-        if(!player.hand.isEmpty()) {
-            player.hand.removeFirst();
+        if(!player.hand.equals("empty")) {
+            player.hand = "empty";
             dropItem();
         }
         }
@@ -268,10 +256,10 @@ public class HelloController {
     public void tray1() {
         setPositionFromGrid(5, 3);
 
-        if(player.tray1 == null && !player.hand.isEmpty())
+        if(player.tray1 == null && !player.hand.equals("empty"))
         {
-            String imagePath = "images/" + player.hand.getFirst() + ".png";
-            player.tray1 = player.hand.removeFirst();
+            String imagePath = "images/" + player.hand + ".png";
+            player.tray1 = player.hand = "empty";
 
             InputStream stream = getClass().getResourceAsStream(imagePath);
             Image image = null;
@@ -280,8 +268,8 @@ public class HelloController {
             }
             trayview1.setImage(image);
             dropItem();
-        } else if (player.tray1 != null && player.hand.isEmpty()) {
-            player.hand.add(player.tray1);
+        } else if (player.tray1 != null && player.hand.equals("empty")) {
+            player.hand =player.tray1;
             pickUpItem(player.tray1);
             trayview1.setImage(null);
             player.tray1 = null;
@@ -293,10 +281,10 @@ public class HelloController {
         setPositionFromGrid(5, 4);
 
 
-        if(player.tray2 == null && !player.hand.isEmpty())
+        if(player.tray2 == null && !player.hand.equals("empty"))
         {
-            String imagePath = "images/" + player.hand.getFirst() + ".png";
-            player.tray2 = player.hand.removeFirst();
+            String imagePath = "images/" + player.hand + ".png";
+            player.tray2 = player.hand = "empty";
 
             InputStream stream = getClass().getResourceAsStream(imagePath);
             Image image = null;
@@ -305,8 +293,8 @@ public class HelloController {
             }
             trayview2.setImage(image);
             dropItem();
-        } else if (player.tray2 != null && player.hand.isEmpty()) {
-            player.hand.add(player.tray2);
+        } else if (player.tray2 != null && player.hand.equals("empty")) {
+            player.hand =player.tray2;
             pickUpItem(player.tray2);
             trayview2.setImage(null);
             player.tray2 = null;
@@ -317,9 +305,8 @@ public class HelloController {
     public void sushi1() {
         setPositionFromGrid(4, 5);
 
-        if (!player.hand.isEmpty() && Objects.equals(player.hand.getFirst(), "rice")) {
-            player.hand.removeFirst();
-            player.hand.add("sushi2");
+        if (!player.hand.equals("empty") && Objects.equals(player.hand, "rice")) {
+            player.hand ="sushi2";
             pickUpItem("sushi2");
         } else {
             displayImageAtGridPosition(4, 5);
@@ -329,9 +316,8 @@ public class HelloController {
     public void sushi2() {
         setPositionFromGrid(3, 5);
 
-        if (!player.hand.isEmpty() && Objects.equals(player.hand.getFirst(), "rice")) {
-            player.hand.removeFirst();
-            player.hand.add("sushi1");
+        if (!player.hand.equals("empty") && Objects.equals(player.hand, "rice")) {
+            player.hand ="sushi1";
             pickUpItem("sushi1");
         } else {
             displayImageAtGridPosition(3, 5);
@@ -359,11 +345,11 @@ public class HelloController {
 
             PauseTransition riceCookingPause = getPauseTransition(rawRiceImageView2, col, row);
             riceCookingPause.play();
-        } else if (riceCookerReady2 && player.hand.isEmpty()) {
+        } else if (riceCookerReady2 && player.hand.equals("empty")) {
             // Pick up cooked rice
             mainPane.getChildren().remove(cookedRiceImageView2 );
             cookedRiceImageView2  = null;
-            player.hand.addFirst("rice");
+            player.hand = "rice";
             pickUpItem("cooked_rice");
 
             riceCookerReady2 = false;
@@ -372,7 +358,7 @@ public class HelloController {
             // Display an error if rice is still cooking and not ready to pick up
             displayImageAtGridPosition(row, col);
         }
-        if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());
+        if(!player.hand.equals("empty")) System.out.println(player.hand);
     }
 
     private @NotNull PauseTransition getPauseTransition(ImageView rawRiceImageView2, int col, int row) {
@@ -416,11 +402,11 @@ public class HelloController {
 
             PauseTransition riceCookingPause = getTransition(rawRiceImageView, col, row);
             riceCookingPause.play();
-        } else if (riceCookerReady && player.hand.isEmpty()) {
+        } else if (riceCookerReady && player.hand.equals("empty")) {
             // Pick up cooked rice
             mainPane.getChildren().remove(cookedRiceImageView);
             cookedRiceImageView = null;
-            player.hand.addFirst("rice");
+            player.hand = "rice";
             pickUpItem("cooked_rice");
 
             riceCookerReady = false;
@@ -429,7 +415,7 @@ public class HelloController {
             // Display an error if rice is still cooking and not ready to pick up
             displayImageAtGridPosition(row, col);
         }
-        if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());
+        if(!player.hand.equals("empty")) System.out.println(player.hand);
     }
 
     private @NotNull PauseTransition getTransition(ImageView rawRiceImageView, int col, int row) {
@@ -453,8 +439,8 @@ public class HelloController {
 
 
     public void customer1() {
-        if (!player.hand.isEmpty()) {
-            String firstItemInHand = player.hand.getFirst();
+        if (!player.hand.equals("empty")) {
+            String firstItemInHand = player.hand;
 
             // Check and complete the item in the order.
             if (orderManager1.getOrders().containsKey(firstItemInHand) && !orderManager1.getOrders().get(firstItemInHand)) {
@@ -473,21 +459,21 @@ public class HelloController {
             }
         } else {
             displayImageAtGridPosition(0, 1);
-            if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());
+            if(!player.hand.equals("empty")) System.out.println(player.hand);
         }
     }
 
 
     public void customer2() {
-        if (!player.hand.isEmpty()) {
-            String firstItemInHand = player.hand.getFirst();
+        if (!player.hand.equals("empty")) {
+            String firstItemInHand = player.hand;
 
             // Check and complete the item in the order.
             if (orderManager2.getOrders().containsKey(firstItemInHand) && !orderManager2.getOrders().get(firstItemInHand)) {
                 set(firstItemInHand, orderManager2, image4, image5, image6);
             } else {
                 displayImageAtGridPosition(0, 2);
-                if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());// Ensure the position reflects this customer's unique UI space.
+                if(!player.hand.equals("empty")) System.out.println(player.hand);// Ensure the position reflects this customer's unique UI space.
             }
 
             if (orderManager2.isOrderComplete()) {
@@ -500,15 +486,15 @@ public class HelloController {
     }
 
     public void customer3() {
-        if (!player.hand.isEmpty()) {
-            String firstItemInHand = player.hand.getFirst();
+        if (!player.hand.equals("empty")) {
+            String firstItemInHand = player.hand;
 
             // Check and complete the item in the order.
             if (orderManager3.getOrders().containsKey(firstItemInHand) && !orderManager3.getOrders().get(firstItemInHand)) {
                 set(firstItemInHand, orderManager3, image7, image8, image9);
             } else {
                 displayImageAtGridPosition(0, 3);
-                if(!player.hand.isEmpty()) System.out.println(player.hand.getFirst());// Ensure the position reflects this customer's unique UI space.
+                if(!player.hand.equals("empty")) System.out.println(player.hand);// Ensure the position reflects this customer's unique UI space.
             }
 
             if (orderManager3.isOrderComplete()) {
@@ -541,7 +527,7 @@ public class HelloController {
         {
             image9.setImage(null);
         }
-        player.hand.removeFirst();
+        player.hand = "empty";
         dropItem();
     }
 

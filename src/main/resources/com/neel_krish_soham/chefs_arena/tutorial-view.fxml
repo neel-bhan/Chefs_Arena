@@ -12,7 +12,7 @@
             <Image url="@images/tutorials.png" />
          </image>
       </ImageView>
-      <Button layoutX="963.0" layoutY="259.0" onAction="#startGame" prefHeight="166.0" prefWidth="273.0" snapToPixel="false" style="-fx-background-color: black; -fx-background-radius: 20;                -fx-border-color: yellow; -fx-border-width: 2;                -fx-text-fill: yellow; -fx-font-family: 'Press Start 2P'; -fx-font-size: 24px; -fx-effect: dropshadow(gaussian, yellow, 5, 0.5, 0, 0);" text="Start">
+      <Button layoutX="963.0" layoutY="259.0" onAction="#startGame" prefHeight="166.0" prefWidth="273.0" snapToPixel="false" style="-fx-background-color: black; -fx-background-radius: 20;                -fx-border-color: yellow; -fx-border-width: 2;                -fx-text-fill: yellow; -fx-font-family: 'Press Start 2P'; -fx-font-size: 24px; -fx-effect: dropshadow(gaussian, yellow, 5, 0.5, 0, 0);" text="Play Game">
       </Button>
 
    </children>

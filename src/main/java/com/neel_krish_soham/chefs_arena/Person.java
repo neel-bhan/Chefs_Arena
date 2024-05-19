@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Person {
 
-    ArrayList<String> hand = new ArrayList<>();
+    String hand = new String("empty");
     public boolean grill1 = false;
     public boolean grill2 = false;
     public boolean grill2Ready = false;
