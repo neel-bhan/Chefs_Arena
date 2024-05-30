@@ -15,7 +15,7 @@ public class EndViewController {
     @FXML
     public void initialize() {
         // Display the final score in the Text node
-        text.setText("$"+HelloController.money_counter);
+        text.setText("$"+HelloController.moneyscounter);
     }
 
     public void setMessage(String message) {

@@ -6,7 +6,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.neel_krish_soham.chefs_arena.EndViewController">
    <children>
       <ImageView fitHeight="737.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
@@ -24,9 +23,9 @@
             <Image url="@images/endscore.png" />
          </image>
       </ImageView>
-      <Text fx:id="text" layoutX="1117.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.5">
+      <Text fx:id="text" layoutX="1118.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="170.5">
          <font>
-            <Font name="Arial Black" size="49.0" />
+            <Font name="Arial Black" size="45.0" />
          </font>
       </Text>
    </children>

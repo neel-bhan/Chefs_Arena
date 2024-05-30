@@ -27,15 +27,16 @@ public class OrderManager {
     public String[] possibleItems = {"drinks", "sushi1", "sushi2", "ramen", "tofu"};
     public  Random rand = new Random();
     private Timer timer;
-    private int timeLeft;
+    private double timeLeft;
     private static int totalOrdersCompleted;
     private Stage stage;
 
-    private int initialTime;
+    private double initialTime;
     public ProgressIndicator progressIndicator;// Listener for expiration events
     public static int lives = 3;
 
     public ImageView image1, image2, image3;
+    public static boolean gameOver = false;
 
 
     // Existing properties and methods remain unchanged
@@ -70,25 +71,7 @@ public class OrderManager {
         stage.show();
 
     }
-    @FXML
-    public void playgame() {
-        try {
 
-
-            // Load the game scene
-            Pane gamePane = FXMLLoader.load(getClass().getResource("end-view.fxml"));
-            Scene gameScene = new Scene(gamePane, 1280, 720);
-
-            // Set the game scene on the current stage
-            stage.setScene(gameScene);
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle exceptions, maybe show an error message
-        }
-    }
 
     // Call this method whenever you update the orders
     public void updateImageViews() {
@@ -154,8 +137,10 @@ public class OrderManager {
                     Platform.runLater(() -> progressIndicator.setProgress(0));
                     System.out.println(name + " order has expired.");
                     lives--;
+                    totalOrdersCompleted -= 3;
                     onOrderExpired();
                     if (lives == 0) {
+                        gameOver = true;
                         Platform.runLater(() -> showEndScreen());
                     }
                 }
@@ -187,27 +172,22 @@ public class OrderManager {
         }
     }
 
-
-
-
-
-
-
-    private int calculateTime() {
-        int baseTimePerItem = 30;
-        int decrementPerTenOrders = 5; // Significantly increased reduction
-        int timeReduction = totalOrdersCompleted / 3 * decrementPerTenOrders; // Reductions occur more frequently, every 3 orders
+    private double calculateTime() {
+        int baseTimePerItem = 40;
+        double decrementPerTenOrders = 2; // Significantly increased reduction
+        double timeReduction = totalOrdersCompleted  * decrementPerTenOrders; // Reductions occur more frequently, every 3 orders
 
         int totalItems = orders.size();
         int baseTime = totalItems * baseTimePerItem;
-        int finalTime = baseTime - timeReduction;
+        double finalTime = baseTime - timeReduction;
 
-        return Math.max(finalTime, 8);
+
+        return Math.max(finalTime, 5);
     }
 
 
     public void generateOrder() {
-        if(lives >= 0) {
+        if(!gameOver) {
             HashMap<String, Boolean> newOrder = new HashMap<>();
             HashMap<String, Integer> newOrderList = new HashMap<>();
             int itemsCount = rand.nextInt(3) + 1; // Generates between 1 and 3 items per order.
@@ -236,13 +216,15 @@ public class OrderManager {
     }
 
     public void onOrderExpired()  {
+        if(!gameOver) {
 
-        generateOrder();
-        System.out.println(this.name + " " + this.orders.toString());  // Debug print
-        this.initialTime = calculateTime();
-        this.timeLeft = initialTime;
-        startTimer();
-
+            generateOrder();
+            totalOrdersCompleted++;
+            System.out.println(this.name + " " + this.orders.toString());  // Debug print
+            this.initialTime = calculateTime();
+            this.timeLeft = initialTime;
+            startTimer();
+        }
 
             // Further logic to handle the expiration, such as resetting the order, etc.
         }
